@@ -93,6 +93,12 @@ public class Binaarikeko {
         }
     }
 
+/*
+ * Ylöspäin siirto etenee samalla tavalla kuin siirto alaspäin: niin kauan kun solmun avain
+ * on vanhempansa avainta pienempi, solmun alkio ja solmun vanhemman alkio vaihtavat
+ * keskenään paikkoja.
+ */
+
     private void heap_up(Binaarinode node) {
         if (node == root) {
             return;
@@ -109,7 +115,12 @@ public class Binaarikeko {
         heap_up(node.parent);
 
     }
-
+/*
+ * Väärässä paikassa olevan alkion siirto oikealle paikalle.
+ * Jos solmun avain on edelleen suurempi kuin vähintään toinen sen lasten avaimista,
+ * jatketaan alaspäin siirtoa. Jos alkio on löytänyt oikean paikkansa,
+ * lopetetaan alaspäin siirto ja keon järjestys on palautettu.
+ */
     private void heap_down() {
         Binaarinode node = root;
         Binaarinode apu;

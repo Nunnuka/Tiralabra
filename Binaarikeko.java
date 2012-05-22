@@ -47,7 +47,8 @@ public class Binaarikeko {
     }
 
 /*
- * Poistaa keosta solmun. 
+ * Poistaa keosta solmun. Tarkistetaan lopuksi heap_down():lla keon j‰rjestys. Aikavaativuuden tehostamiseksi
+ * k‰ytet‰‰n apumuuttujaa.
  */
     public int delete() {
         if (koko == 1) {

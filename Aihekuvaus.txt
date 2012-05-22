@@ -1,0 +1,22 @@
+Aihekuvaus
+
+
+Dijkstra bin‰‰rikeolla.
+
+Bin‰‰rikeon muodostava bin‰‰ripuu on t‰ydellinen: jokainen puun taso mahdollisesti alinta
+lukuun ottamatta on t‰ynn‰. Alimmalla tasolla kaikki solmut on sijoitettu vasempaan
+reunaan. Jokainen puun solmu sis‰lt‰‰ yhden alkion.
+
+Dijkstran algoritmi etsii graafille lyhyimm‰n polun yhdest‰ pisteest‰ kaikkiin muihin pisteisiin 
+juuri t‰m‰n bin‰‰rikeon avulla. 
+
+
+Algoritmi etsii lyhyimm‰n reitin pisteest‰ a kaikkiin muihin graafin pisteisiin. 
+Aluksi merkit‰‰n lyhin tunnettu polku pisteest‰ a itseens‰ nollaksi, ja et‰isyydet pisteest‰ a muihin pisteisiin 
+‰‰rettˆm‰ksi. T‰m‰n j‰lkeen k‰yd‰‰n graafia l‰pi kierroksittain. Jokaisella kierroksella pyrit‰‰n etsim‰‰n uusi 
+polku pisteeseen a joka on lyhyempi kuin jokin aikaisemmin tunnettu. 
+Jokaisella kierroksella aloitetaan tutkimaan jotain sellaista pistett‰ johon jo 
+tunnetaan lyhin mahdollinen polku. Kun t‰st‰ pisteest‰ aloitetaan uusi kierros, 
+ei siit‰ pisteest‰ en‰‰ aloiteta mill‰‰n myˆhemm‰ll‰ kierroksella. 
+Ensimm‰isell‰ kierroksella aloitetaan pisteest‰ a, koska siihen tunnetaan selv‰sti jo lyhyin polku. 
+Seuraavaksi aloitetaan pisteest‰ b joka on pisteen a l‰hin naapuri, ja niin edelleen.

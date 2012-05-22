@@ -8,6 +8,10 @@ package main;
  *
  * @author Annika
  */
+
+/*
+ * Solmuun tallenetaan kolme linkkiä: vanhempi, vasen ja oikea lapsi
+ */
 public class Binaarinode {
 
     int value;

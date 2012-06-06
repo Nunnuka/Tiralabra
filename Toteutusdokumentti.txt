@@ -1,0 +1,14 @@
+
+1. Ohjelman yleisrakenne
+
+Vertailen kolmea eri kekorakennetta aikavaativuuksien osalta. 
+
+2. Saavutetut aika- ja tilavaativuudet (m.m. O-analyysi pseudokoodista)
+
+Määrittelydokumentin aikavaativuudet on saavutettu.
+
+3. Suorituskyky- ja O-analyysivertailu (mikäli työ vertailupainotteinen)
+
+4. Työn mahdolliset puutteet ja parannusehdotukset
+
+5. Lähteet

@@ -1,0 +1,31 @@
+
+1. Mitä algoritmeja ja tietorakenteita toteutat työssäsi?
+
+Toteutan työssäni kolme eri kekotietorakennetta: binomikeon, binäärikeon sekä fibonaccikeon. 
+
+2. Mitä ongelmaa ratkaiset ja miksi valitsit kyseiset algoritmit/tietorakenteet?
+
+Esittelen kolme eri kekoa ja niiden rakenteet. Valitsin kyseiset algoritmit, koska kekorakenteet kiinnostavat minua.
+
+3. Mitä syötteitä ohjelma saa ja miten näitä käytetään?
+
+Ohjelmani ei itsessään saa syötteitä. Keolla on kuitenkin monta eri käyttökohdetta, esimerkiksi verkkoalgoritmit 
+käyttävät usein kekoa solmujen läpikäyntijärjestyksen tallentamiseen ja selvittämiseen.
+
+
+4. Tavoitteena olevat aika- ja tilavaativuudet (m.m. O-analyysi)
+
+Binäärikeossa metodit insert() ja delete() menevät läpi parhaimmassa tapauksessa ajassa O(log n). Delete() voidaan
+myös käydä läpi vakioajassa, joka on yhtä suuri kuin puun korkeus. Keon rakentamiseen menee aikaa O(n log n),
+sillä jokainen insert() vie aikaa O(log n) ja niitä tehdään n kertaa, niin kauan kuin lisättäviä alkioita on. 
+
+Binomikeossa metodi merge() menee läpi ajassa O(log n). Insert() -metodi menisi läpi vakioajassa, sillä siinä vain
+tehdään uusi keko ja yhdistetään se vanhaan kekoon. Juuri tämä yhdistäminen, eli merge() aiheuttaa sen, että
+insertin aikavaativuus on O(log n). Pienimmän alkion löytäminen sekä poistaminen saadaan läpi ajassa O(log n).
+Jos pieninpään alkioon on ylläpidetty pointteria, sen löytäminen saadaan läpi ajassa O(1).
+
+5. Lähteet
+
+http://www.cs.helsinki.fi/u/tapasane/keot.pdf
+http://www.cs.princeton.edu/~wayne/cs423/demos.html
+http://www.cs.helsinki.fi/u/floreen/tira2012/tira.pdf

@@ -1,7 +1,7 @@
 
 1. Miten koodi k‰‰nnett‰‰n? (jos valmis ajettava ohjelma ei mukana palautuksessa)
 
-Algoritmit voi ajaa komentorivilt‰ k‰skyll‰ java tiedosto.java
+Algoritmit voi ajaa komentorivilt‰ k‰skyll‰ javac tiedosto.java
 
 
 2. Miten ohjelma suoritetaan, miten eri toiminnallisuuksia k‰ytet‰‰n?

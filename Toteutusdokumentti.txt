@@ -1,7 +1,40 @@
 
 1. Ohjelman yleisrakenne
 
-Vertailen kolmea eri kekorakennetta aikavaativuuksien osalta. 
+Vertailen kolmea eri kekorakennetta.
+
+Bin‰‰rikeko:
+
+Insert() -metodissa muutetaan ensin luku bin‰‰rimuotoon, sitten aloitetaan bin‰‰riluvun l‰pik‰ynti
+toisesta numerosta siirtym‰ll‰ puussa vasemmalle jos numero on 0 ja oikealle, jos numero on 1.
+Esimerkiksi luku 11 on bin‰‰rin‰ 1011. Nyt siis puussa liikuttaisiin vasen -> oikea -> oikea. 
+          
+	   x
+ 	 /   \
+ 	/     \
+       /       \
+      x        x
+     / \      / \
+     x   x   x   x
+    / \ / \      
+   x  x x 11 
+
+Delete taas toimii siten, ett‰ korvataan juuri solmulla, joka on lis‰tty viimeisen‰. T‰m‰ etsit‰‰n samalla tavalla
+kuin insertiss‰. Insertin ja deleten j‰lkeen rullataan solmu oikeaan paikkaan kutsumalla aina heap-up:ia tai 
+heap-down:ia, jotka varmistavat ett‰ minimikeon ehdot t‰yttyv‰t.
+
+
+Binomikeko:
+
+Binomikeko koostuu useammasta puusta, jotka ovat kooltaan 2^n, n kuuluu luonnollisiin lukuihin.
+Binomikeossa lis‰ys tapahtuu tekem‰ll‰ uudesta solmusta oma keko ja yhdist‰m‰ll‰ se jo 
+olemasssaolevan keon kanssa. Kun havaitaan, ett‰ keossa on kaksi samankokoista alipuuta, ne yhdistet‰‰n 
+merge() -metodin avulla. Pienimm‰m alkion poistamisessa aluksi pienin alkio, joka lˆytyy keon jostakin juuresta, 
+poistetaan juurilistasta. Jos kyseisell‰ juurella on lapsia, j‰rjestys k‰‰nnet‰‰n, ne lis‰t‰‰n uuteen kekoon
+ja taas yhdistet‰‰n uusi keko jo olemassaolevan keon kanssa. Pienin alkio etsit‰‰n etsi_min() -metodilla,
+joka k‰y juurilistan l‰pi ja etsii niist‰ pienimm‰n alkion.
+Binomikeon toteutuksessa lˆytyy toString-metodi, joka helpottaa keon hahmottamista tulostamalla juurilistan
+ja lapset eri kerroksissa.
 
 2. Saavutetut aika- ja tilavaativuudet (m.m. O-analyysi pseudokoodista)
 
@@ -9,6 +42,19 @@ M‰‰rittelydokumentin aikavaativuudet on saavutettu.
 
 3. Suorituskyky- ja O-analyysivertailu (mik‰li tyˆ vertailupainotteinen)
 
+Vertailussa keskeisimm‰t metodit.
+
+		Bin‰‰rikeko | Binomikeko | Fibonaccikeko 
+insert		  O(log n)  |  O(log n)  |     
+deleteMin	  O(log n)  |  O(log n)  | 
+decreaseKey	  O(log n)  |  O(log n)  |   
+
+
+
 4. Tyˆn mahdolliset puutteet ja parannusehdotukset
 
 5. L‰hteet
+
+http://en.wikipedia.org/wiki/Binary_heap
+http://en.wikipedia.org/wiki/Binomial_heap
+Cormen, Leiserson, Rivest, Stein: Introduction to Algorithms

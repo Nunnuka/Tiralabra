@@ -14,10 +14,10 @@ import static org.junit.Assert.*;
  */
 
 
-public class Binaarikekotest {
+public class BinaarikekoTest {
     Binaarikeko binaarikeko;
     
-    public Binaarikekotest() {
+    public BinaarikekoTest() {
     }
 
     @BeforeClass

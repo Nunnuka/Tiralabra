@@ -49,8 +49,6 @@ public class Fibonaccikeko {
         koko++;
     }
 
-  
-
     /*  poistetaan y keon juurilistasta (this)
      *  tehdään y:stä x:n lapsi
      *  kasvatetaan x:n astetta
@@ -103,6 +101,176 @@ public class Fibonaccikeko {
             K.koko = K1.koko + K2.koko;
         }
         return K;
+    }
+    
+    //etsitään keon pienin alkio
+    public Fibonaccinode extract_min() {
+        Fibonaccinode z = min;
+        if (z != null) {
+            int lapset = z.aste;
+            Fibonaccinode x = z.lapsi;
+            Fibonaccinode valiaikainen;
+
+            while (lapset > 0) {
+                valiaikainen = x.oikea;
+
+                x.vasen.oikea = x.oikea;
+                x.oikea.vasen = x.vasen;
+
+                x.vasen = min;
+                x.oikea = min.oikea;
+
+                min.oikea = x;
+                x.oikea.vasen = x;
+
+                x.vanhempi = null;
+                x = valiaikainen;
+                lapset--;
+            }
+            z.vasen.oikea = z.oikea;
+            z.oikea.vasen = z.vasen;
+
+            if (z == z.oikea) {
+                min = null;
+            } else {
+                min = z.oikea;
+                consolidate();
+            }
+            koko--;
+        }
+        return z;
+    }
+
+    public void consolidate() {
+        int taulukonKoko = ((int) Math.floor(Math.log(koko) * logPhi)) + 1;
+        Fibonaccinode[] taulukko = new Fibonaccinode[taulukonKoko];
+
+        for (int j = 0; j < taulukonKoko; j++) {
+            taulukko[j] = null;
+        }
+        int juuret = 0;
+        Fibonaccinode x = min;
+        if (x != null) {
+            juuret++;
+            x = x.oikea;
+            while (x != min) {
+                juuret++;
+                x = x.oikea;
+            }
+        }
+        for (int i = 0; i < juuret; i++){
+            int d = x.aste;
+            Fibonaccinode seuraava = x.oikea;
+            // Käydään taulukko läpi etsien onko saman kokoisia
+            for (Fibonaccinode n : taulukko) {
+                Fibonaccinode y = taulukko[d];
+                if (y == null) {
+                    break;
+                }
+                if (x.arvo > y.arvo) {
+                    Fibonaccinode valiaik = y;
+                    y = x;
+                    x = valiaik;
+                }
+                link(y, x);
+                taulukko[d] = null;
+                d++;
+            }
+            taulukko[d] = x;
+            x = seuraava;
+        }
+        min = null;
+        for (int i = 0; i < taulukonKoko; i++) {
+            Fibonaccinode y = taulukko[i];
+            if (y == null) {
+                continue;
+            }
+            if (min != null) {
+                y.vasen.oikea = y.oikea;
+                y.oikea.vasen = y.vasen;
+                y.vasen = min;
+                y.oikea = min.oikea;
+                min.oikea = y;
+                y.oikea.vasen = y;
+                if (y.arvo < min.arvo) {
+                    min = y;
+                }
+            } else {
+                min = y;
+            }
+        }
+    }
+ 
+    //pienennetään solmun arvoa
+    public void decreaseKey(Fibonaccinode x, int k) {
+        if (k > x.arvo) {
+            throw new IllegalArgumentException("Annoit suuremman arvon!");
+        }
+        x.arvo = k;
+        Fibonaccinode y = x.vanhempi;
+        if ((y != null) && (x.arvo < y.arvo)) {
+            cut(x, y);
+            cascadingCut(y);
+        }
+        if (x.arvo < min.arvo) {
+            min = x;
+        }
+    }
+
+    protected void cascadingCut(Fibonaccinode y) {
+        Fibonaccinode z = y.vanhempi;
+        if (z != null) {
+            if (!y.mark) {
+                y.mark = true;
+            } else {
+                cut(y, z);
+                cascadingCut(z);
+            }
+        }
+    }
+
+    protected void cut(Fibonaccinode x, Fibonaccinode y) {
+        x.vasen.oikea = x.oikea;
+        x.oikea.vasen = x.vasen;
+        y.aste--;
+        if (y.lapsi == x) {
+            y.lapsi = x.oikea;
+        }
+
+        if (y.aste == 0) {
+            y.lapsi = null;
+        }
+        x.vasen = min;
+        x.oikea = min.oikea;
+        min.oikea = x;
+        x.oikea.vasen = x;
+        x.vanhempi = null;
+        x.mark = false;
+    }
+
+    // poistetaan alkio
+    public void delete(Fibonaccinode x)
+    {
+        decreaseKey(x, Integer.MIN_VALUE);
+        extract_min();
+    }
+
+    public static void main(String[] args) {
+        Fibonaccikeko Fikeko = new Fibonaccikeko();
+        for (int i = 4; i != 0; i--) {
+            Fikeko.insert(i);
+        }
+        Fibonaccikeko Fikeko2 = new Fibonaccikeko();
+        for (int j = 4; j != 0; j--) {
+            Fikeko2.insert(j);
+        }
+
+        Fibonaccikeko unioni = Fikeko.union(Fikeko, Fikeko2);
+
+        System.out.println(unioni.extract_min().arvo);
+        System.out.println(unioni.extract_min().arvo);
+        System.out.println(unioni.extract_min().arvo);
+        System.out.println(unioni.extract_min().arvo);
     }
 
  

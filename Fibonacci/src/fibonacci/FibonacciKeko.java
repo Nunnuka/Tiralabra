@@ -10,8 +10,8 @@ package fibonacci;
  */
 public class FibonacciKeko {
 
-    //Tarvitaan solmun suurimman mahdollisen asteen laskemiseen. 
-    private static final double logKultainenLeikkaus = 1.0 / Math.log((1.0 + Math.sqrt(5.0)) / 2.0);
+    //Puun, jolla on n lasta, suurin mahdollinen aste r on log_fii(n). (r <= log_fii(n))
+    private static final double log_fii = 1.0 / Math.log((1.0 + Math.sqrt(5.0)) / 2.0);
     FibonacciNode min;
     int koko;
 
@@ -144,7 +144,7 @@ public class FibonacciKeko {
     //etsitÃ¤Ã¤n uusi minimi. metodin lÃ¤pikÃ¤ynnin jÃ¤lkeen keossa on maksimissaan
     //yksi jokaista kokoa olevia alipuita
     public void consolidate() {
-        int taulukonKoko = ((int) Math.floor(Math.log(koko) * logKultainenLeikkaus)) + 1;
+        int taulukonKoko = ((int) Math.floor(Math.log(koko) * log_fii)) + 1;
         FibonacciNode[] taulukko = new FibonacciNode[taulukonKoko];
         for (int j = 0; j < taulukonKoko; j++) {
             taulukko[j] = null;

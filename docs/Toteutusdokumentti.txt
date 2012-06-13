@@ -38,7 +38,7 @@ ja lapset eri kerroksissa.
 
 Fibonaccikeko:
 
-Fibonaccikeon insert on yksinkertainen: alkiot vain lis‰y‰‰nn kahteen suuntaan linkitettyyn listaan oikeaan
+Fibonaccikeon insert on yksinkertainen: alkiot vain lis‰t‰‰n kahteen suuntaan linkitettyyn listaan oikeaan
 paikkaan, ja tarkastetaan olisiko lis‰tt‰v‰ pienempi kuin t‰m‰nhetkinen minimi. Pienint‰ alkiota poistettaessa 
 ensiksi poistetaan pienimm‰n arvon omaava alkio juurilistasta, ja sen lapsista tulee uusia juuria uusille alipuille. 
 Decrease key v‰hent‰‰ yhden alkion arvoa, mik‰li parametrin‰ on pienempi arvo. Jos kekoehto vioittuu eli alkion

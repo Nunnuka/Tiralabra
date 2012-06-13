@@ -45,9 +45,23 @@ M‰‰rittelydokumentin aikavaativuudet on saavutettu.
 Vertailussa keskeisimm‰t metodit.
 
 		Bin‰‰rikeko | Binomikeko | Fibonaccikeko 
-insert		  O(log n)  |  O(log n)  |     
-deleteMin	  O(log n)  |  O(log n)  | 
-decreaseKey	  O(log n)  |  O(log n)  |   
+insert		  O(log n)  |  O(log n)  |     O(1)
+deleteMin	  O(log n)  |  O(log n)  |     O(log n) amortisoitu
+decreaseKey	  O(log n)  |  O(log n)  |     O(1)
+
+Binaarikeko: 
+Aikaa kului 100000 alkion lis‰ykseen: 150.0ms.
+Aikaa kului 1000000 alkion lis‰ykseen: 1543.0ms.
+Aikaa 100000 alkion poistamiseen kului: 130.0ms.
+
+Binomikeko: 
+Aikaa kului 100000 alkion lis‰ykseen: 75.0ms.
+Aikaa kului 1000000 alkion lis‰ykseen: 751.0ms
+
+Fibonaccikeko:
+Aikaa kului 100000 alkion lis‰ykseen: 20.0ms.
+Aikaa kului 1000000 alkion lis‰ykseen: 475.0ms.
+Aikaa 100000 alkion poistamiseen kului: 120.0ms.
 
 
 

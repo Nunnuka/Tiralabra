@@ -20,6 +20,22 @@ public class FibonacciKekoTest {
         keko = new FibonacciKeko();
     }
 
+    @Test
+    public void lisaysTesti(){
+        long alku = System.currentTimeMillis();
+        for (int i = 0; i < 100000; i++){
+            keko.insert(i);
+        }
+        long loppu = System.currentTimeMillis();
+        System.out.println("Aikaa kului 100k alkion lisäykseen: " + (loppu-alku)*1.0 + "ms.");
+        
+        long poistoAlku = System.currentTimeMillis();
+        for (int i = 0; i < 100000; i++){
+            keko.extract_min();
+        }
+        long poistoLoppu = System.currentTimeMillis();
+        System.out.println("Aikaa 100000 alkion poistamiseen kului: " + (poistoLoppu-poistoAlku)*1.0 + "ms.");
+    }
     
     @Test
     public void pieniLisaysTesti(){
@@ -37,6 +53,7 @@ public class FibonacciKekoTest {
         assertEquals(unioni.extract_min().arvo, 1);
         assertEquals(unioni.extract_min().arvo, 2);
         assertEquals(unioni.extract_min().arvo, 2);
+
     }
     //Lisätään kekoon 10000 alkiota ja poistetaan ne.
     @Test

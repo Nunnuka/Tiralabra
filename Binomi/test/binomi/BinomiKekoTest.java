@@ -19,6 +19,23 @@ public class BinomiKekoTest {
     public void setUp() {
     keko = new BinomiKeko();
     }
+    
+    @Test
+    public void lisaysTesti(){
+        long alku = System.currentTimeMillis();
+        for (int i = 0; i < 100000; i++){
+            keko.insert(i);
+        }
+        long loppu = System.currentTimeMillis();
+        System.out.println("Aikaa kului 100k alkion lisäykseen: " + (loppu-alku)*1.0 + "ms.");
+        
+        long poistoAlku = System.currentTimeMillis();
+        for (int i = 0; i < 100000; i++){
+            keko.extract_min();
+        }
+        long poistoLoppu = System.currentTimeMillis();
+        System.out.println("100k alkion poistamiseen kului: " + (poistoLoppu-poistoAlku)*1.0 + "ms.");
+    }
 
     @Test
     public void kekoTesti(){

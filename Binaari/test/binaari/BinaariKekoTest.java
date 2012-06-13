@@ -15,36 +15,39 @@ import static org.junit.Assert.*;
 
 
 public class BinaariKekoTest {
-    BinaariKeko binaarikeko;
-    
-    public BinaariKekoTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
+    BinaariKeko keko;
     
     @Before
     public void setUp() {
-        binaarikeko = new BinaariKeko();
+        keko = new BinaariKeko();
     }
     
-    @After
-    public void tearDown() {
+    @Test
+    public void lisaysTesti(){
+        long alku = System.currentTimeMillis();
+        for (int i = 0; i < 100000; i++){
+            keko.insert(i);
+        }
+        long loppu = System.currentTimeMillis();
+        System.out.println("Aikaa kului 100k alkion lisäykseen: " + (loppu-alku)*1.0 + "ms.");
+        
+        long poistoAlku = System.currentTimeMillis();
+        for (int i = 0; i < 100000; i++){
+            keko.delete();
+        }
+        long poistoLoppu = System.currentTimeMillis();
+        System.out.println("100k alkion poistamiseen kului: " + (poistoLoppu-poistoAlku)*1.0 + "ms.");
+        
     }
 
     @Test
     public void kekoTesti(){
         long alku = System.currentTimeMillis();
         for (int i = 0; i < 10000000; i++){
-            binaarikeko.insert(i);
+            keko.insert(i);
         }
         for (int i = 0; i < 10000000; i++){
-            binaarikeko.delete();
+            keko.delete();
             
         }
         long loppu = System.currentTimeMillis();

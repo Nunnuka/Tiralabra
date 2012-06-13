@@ -1,3 +1,4 @@
+package fibonacci;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -5,36 +6,37 @@
 
 /**
  *
- * @author AnnikaTyökone
+ * @author Annika
  */
-public class Fibonaccikeko {
+public class FibonacciKeko {
 
-    private static final double logPhi = 1.0 / Math.log((1.0 + Math.sqrt(5.0)) / 2.0);
-    Fibonaccinode min;
+    //Tarvitaan solmun suurimman mahdollisen asteen laskemiseen. 
+    private static final double logKultainenLeikkaus = 1.0 / Math.log((1.0 + Math.sqrt(5.0)) / 2.0);
+    FibonacciNode min;
     int koko;
 
-    public Fibonaccikeko() {
+    public FibonacciKeko() {
         min = null;
         koko = 0;
     }
 
-    public Fibonaccikeko(Fibonaccinode solmu) {
+    public FibonacciKeko(FibonacciNode solmu) {
         min = solmu;
         koko = 1;
     }    
     
-    //lisätään uusi solmu kekoon. Uudesta solmusta tehdään uusi 
+    //lisätään uusi solmu kekoon. Uudesta solmusta tehdÃ¤Ã¤n uusi 
     //yhden solmun kokoinen alipuu.
     //Aikavaativuudeltaan vakio
     public void insert(int arvo) {
-        Fibonaccinode x = new Fibonaccinode(arvo);
+        FibonacciNode x = new FibonacciNode(arvo);
         x.aste = 0;
         x.vanhempi = null;
         x.lapsi = null;
         x.vasen = x;
         x.oikea = x;
         if (min != null) {            
-            //solmut linkitetään toisiinsa            
+            //solmut linkitetÃ¤Ã¤n toisiinsa            
             x.vasen = min;
             x.oikea = min.oikea;
             min.oikea = x;
@@ -50,10 +52,10 @@ public class Fibonaccikeko {
     
     /*
      * poistetaan y keon juurilistasta (this) 
-     * tehdään y:stä x:n lapsi
+     * tehdään y_stä x:n lapsi
      * kasvatetaan x:n astetta
      */ 
-    public void link(Fibonaccinode y, Fibonaccinode x) {
+    public void link(FibonacciNode y, FibonacciNode x) {
         y.vasen.oikea = y.oikea;
         y.oikea.vasen = y.vasen;
         y.vanhempi = x;
@@ -72,18 +74,18 @@ public class Fibonaccikeko {
     }    
     
     /*
-     * Tehdään ensin uusi keko, johon yhdistetään kaksi vanhaa kekoa. Tehdään toisen
-     * minimistä uuden keon minimi, päivitetään keon koko
+     * TehdÃ¤Ã¤n ensin uusi keko, johon yhdistetÃ¤Ã¤n kaksi vanhaa kekoa. TehdÃ¤Ã¤n toisen
+     * minimistÃ¤ uuden keon minimi, pÃ¤ivitetÃ¤Ã¤n keon koko
      */
-    public Fibonaccikeko union(Fibonaccikeko K1, Fibonaccikeko K2) {
-        Fibonaccikeko K = new Fibonaccikeko();        
+    public FibonacciKeko union(FibonacciKeko K1, FibonacciKeko K2) {
+        FibonacciKeko K = new FibonacciKeko();        
         //tarkistetaan, ettei kummankaan keon minimi ole null        
         if ((K1 != null) && (K2 != null)) {            
-            //tehdään alustavasti K1:n minimistä K:n minimi            
+            //tehdÃ¤Ã¤n alustavasti K1:n minimistÃ¤ K:n minimi            
             K.min = K1.min;
             if (K.min != null) {
                 if (K2.min != null) {                    
-                    //lisätään K2 uuteen kekoon laittamalla sen alkiot oikeille paikoille                    
+                    //lisÃ¤tÃ¤Ã¤n K2 uuteen kekoon laittamalla sen alkiot oikeille paikoille                    
                     K.min.oikea.vasen = K2.min.vasen;
                     K2.min.vasen.oikea = K.min.oikea;
                     K.min.oikea = K2.min;
@@ -103,17 +105,17 @@ public class Fibonaccikeko {
     }
     
     /*
-     * Poistetaan miminijuuri. Sen lapsista tulee uusien puiden juuria. Sen jälkeen
-     * päivitetään pointteri osoittamaan minimiin. Jos kahdella juurella on sama aste,
-     * tehdään toisesta lapsi siten että pienempi pysyy juurena, aste kasvaa yhdellä
+     * Poistetaan miminijuuri. Sen lapsista tulee uusien puiden juuria. Sen jÃ¤lkeen
+     * pÃ¤ivitetÃ¤Ã¤n pointteri osoittamaan minimiin. Jos kahdella juurella on sama aste,
+     * tehdÃ¤Ã¤n toisesta lapsi siten ettÃ¤ pienempi pysyy juurena, aste kasvaa yhdellÃ¤
      * Toistetaan kunnes kaikilla eri aste. 
      */
-    public Fibonaccinode extract_min() {
-        Fibonaccinode z = min;
+    public FibonacciNode extract_min() {
+        FibonacciNode z = min;
         if (z != null) {
             int lapset = z.aste;
-            Fibonaccinode x = z.lapsi;
-            Fibonaccinode valiaikainen;
+            FibonacciNode x = z.lapsi;
+            FibonacciNode valiaikainen;
             while (lapset > 0) {
                 valiaikainen = x.oikea;
                 x.vasen.oikea = x.oikea;
@@ -139,16 +141,16 @@ public class Fibonaccikeko {
         return z;
     }
 
-    //etsitään uusi minimi. metodin läpikäynnin jälkeen keossa on maksimissaan
+    //etsitÃ¤Ã¤n uusi minimi. metodin lÃ¤pikÃ¤ynnin jÃ¤lkeen keossa on maksimissaan
     //yksi jokaista kokoa olevia alipuita
     public void consolidate() {
-        int taulukonKoko = ((int) Math.floor(Math.log(koko) * logPhi)) + 1;
-        Fibonaccinode[] taulukko = new Fibonaccinode[taulukonKoko];
+        int taulukonKoko = ((int) Math.floor(Math.log(koko) * logKultainenLeikkaus)) + 1;
+        FibonacciNode[] taulukko = new FibonacciNode[taulukonKoko];
         for (int j = 0; j < taulukonKoko; j++) {
             taulukko[j] = null;
         }
         int juuret = 0;
-        Fibonaccinode x = min;
+        FibonacciNode x = min;
         if (x != null) {
             juuret++;
             x = x.oikea;
@@ -159,15 +161,15 @@ public class Fibonaccikeko {
         }
         for (int i = 0; i < juuret; i++) {
             int d = x.aste;
-            Fibonaccinode seuraava = x.oikea;            
-            // Käydään taulukko läpi etsien onko saman kokoisia            
-            for (Fibonaccinode n : taulukko) {
-                Fibonaccinode y = taulukko[d];
+            FibonacciNode seuraava = x.oikea;            
+            // KÃ¤ydÃ¤Ã¤n taulukko lÃ¤pi etsien onko saman kokoisia            
+            for (FibonacciNode n : taulukko) {
+                FibonacciNode y = taulukko[d];
                 if (y == null) {
                     break;
                 }
                 if (x.arvo > y.arvo) {
-                    Fibonaccinode valiaik = y;
+                    FibonacciNode valiaik = y;
                     y = x;
                     x = valiaik;
                 }
@@ -180,7 +182,7 @@ public class Fibonaccikeko {
         }
         min = null;
         for (int i = 0; i < taulukonKoko; i++) {
-            Fibonaccinode y = taulukko[i];
+            FibonacciNode y = taulukko[i];
             if (y == null) {
                 continue;
             }
@@ -202,19 +204,19 @@ public class Fibonaccikeko {
     
     
     /*
-     * Otetaan solmu, pienennetään sen arvoa. Jos uusi arvo on pienempi kuin sen
+     * Otetaan solmu, pienennetÃ¤Ã¤n sen arvoa. Jos uusi arvo on pienempi kuin sen
      * vanhempi, leikataan pienempi solmu irti vanhemmastaan. Jos vanhempi ei ole
      * juuri, merkataan se. Jos se on jo merkattu, leikataan sekin irti ja sen vanhempi
-     * merkataan. Tätä jatketaan kunnes löydetään juuri/merkkaamaton solmu
+     * merkataan. TÃ¤tÃ¤ jatketaan kunnes lÃ¶ydetÃ¤Ã¤n juuri/merkkaamaton solmu
      */
-    public void decreaseKey(Fibonaccinode x, int k) {
+    public void decreaseKey(FibonacciNode x, int k) {
         if (k > x.arvo) {
             throw new IllegalArgumentException("Annoit suuremman arvon!");
         }
         x.arvo = k;
-        Fibonaccinode y = x.vanhempi;
+        FibonacciNode y = x.vanhempi;
         if ((y != null) && (x.arvo < y.arvo)) {
-            //täss kohtaa siis leikkaus
+            //tÃ¤ss kohtaa siis leikkaus
             cut(x, y);
             cascadingCut(y);
         }
@@ -223,8 +225,8 @@ public class Fibonaccikeko {
         }
     }
 
-    protected void cascadingCut(Fibonaccinode y) {
-        Fibonaccinode z = y.vanhempi;
+    protected void cascadingCut(FibonacciNode y) {
+        FibonacciNode z = y.vanhempi;
         if (z != null) {
             if (!y.mark) {
                 //merkataan solmu
@@ -239,7 +241,7 @@ public class Fibonaccikeko {
     /*
      * Leikataan solmu irti puusta.
      */
-    protected void cut(Fibonaccinode x, Fibonaccinode y) {
+    protected void cut(FibonacciNode x, FibonacciNode y) {
         x.vasen.oikea = x.oikea;
         x.oikea.vasen = x.vasen;
         y.aste--;
@@ -259,28 +261,9 @@ public class Fibonaccikeko {
     
     
     // poistetaan alkio kutsumalla metodeita decreaseKey ja extract_min  
-    public void delete(Fibonaccinode x) {
+    public void delete(FibonacciNode x) {
         decreaseKey(x, Integer.MIN_VALUE);
         extract_min();
-    }
-
-    /*
-     * Ohjelman main, jossa testataan eri metodeja
-     */
-    public static void main(String[] args) {
-        Fibonaccikeko Fikeko = new Fibonaccikeko();
-        for (int i = 4; i != 0; i--) {
-            Fikeko.insert(i);
-        }
-        Fibonaccikeko Fikeko2 = new Fibonaccikeko();
-        for (int j = 4; j != 0; j--) {
-            Fikeko2.insert(j);
-        }
-        Fibonaccikeko unioni = Fikeko.union(Fikeko, Fikeko2);
-        System.out.println(unioni.extract_min().arvo);
-        System.out.println(unioni.extract_min().arvo);
-        System.out.println(unioni.extract_min().arvo);
-        System.out.println(unioni.extract_min().arvo);
     }
 }
 

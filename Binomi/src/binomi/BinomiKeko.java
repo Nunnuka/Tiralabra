@@ -2,21 +2,21 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package TiraAnnika;
+package binomi;
 
     /**
  *
  * @author Annika
  */
-public class Binomikeko{
+public class BinomiKeko{
 
-    Binominode juuri;
+    BinomiNode juuri;
     int koko;
 
-    public Binomikeko() {
+    public BinomiKeko() {
     }
 
-    public Binomikeko(Binominode solmu, int koko) {
+    public BinomiKeko(BinomiNode solmu, int koko) {
         this.koko = koko;
         this.juuri = solmu;
     }
@@ -26,25 +26,25 @@ public class Binomikeko{
     //yhdistetään se alkuperäiseen kekoon.
     public void insert(int arvo) {
         //luodaan uusi keko
-        Binomikeko keko1 = new Binomikeko();
-        Binominode solmu = new Binominode(arvo);
+        BinomiKeko keko1 = new BinomiKeko();
+        BinomiNode solmu = new BinomiNode(arvo);
         
         solmu.vanhempi = null;
         solmu.lapsi = null;
         solmu.sisar = null;
         solmu.aste = 0;
         keko1.juuri = solmu;
-        Binomikeko keko2 = union(keko1, this);
+        BinomiKeko keko2 = union(keko1, this);
         this.juuri = keko2.juuri;
         koko++;
     }
 
     //etsitään keon pienin arvo
-    public Binominode etsi_min() {
+    public BinomiNode etsi_min() {
         //arvolle annetaan mahd suurin arvo
         int arvo = Integer.MAX_VALUE;
-        Binominode apusolmu = juuri;
-        Binominode min = null;
+        BinomiNode apusolmu = juuri;
+        BinomiNode min = null;
         //käydään läpi keko solmu solmulta, ja pidetään yllä keon pienintä arvoa muuttujan
         //min avulla
         while (apusolmu != null) {
@@ -59,11 +59,11 @@ public class Binomikeko{
 
     //poistetaan pienin arvo keosta 
     public void extract_min() {
-        Binomikeko apukeko = new Binomikeko();
-        Binominode min = etsi_min();
-        Binominode val = min.lapsi;
-        Binominode nyk = juuri;
-        Binominode apu = juuri;
+        BinomiKeko apukeko = new BinomiKeko();
+        BinomiNode min = etsi_min();
+        BinomiNode val = min.lapsi;
+        BinomiNode nyk = juuri;
+        BinomiNode apu = juuri;
 
         //jos juuri ei ole minimi, etsitään sen sisarista pienintä arvoa
         if (juuri.arvo != min.arvo) {
@@ -83,36 +83,36 @@ public class Binomikeko{
              * Vaihdetaan alipuun järjestys
              */
             while (val != null) {
-                Binominode seuraava = val.sisar;
+                BinomiNode seuraava = val.sisar;
                 val.sisar = apukeko.juuri;
                 apukeko.juuri = val;
                 val = seuraava;
             }
 
-            Binomikeko uusi = union(this, apukeko);
+            BinomiKeko uusi = union(this, apukeko);
             this.juuri = uusi.juuri;
         }
     }
 
   
     //luodaan kahden annetun binomisolmun välille vanhempi-lapsu yhteys
-    public void link(Binominode y, Binominode z) {
+    public void link(BinomiNode y, BinomiNode z) {
         y.vanhempi = z;
         y.sisar = z.lapsi;
         z.lapsi = y;
         z.aste++;
     }
     //yhdistetään kaksi kekoa toisiinsa mergeä apuna käyttäen
-    public Binomikeko union(Binomikeko k1, Binomikeko k2) {
-        Binomikeko k = new Binomikeko();
+    public BinomiKeko union(BinomiKeko k1, BinomiKeko k2) {
+        BinomiKeko k = new BinomiKeko();
         //valitaan juuri mergen avulla
         k.juuri = merge(k1, k2);
         if (k.juuri == null) {
             return k;
         }
-        Binominode edellinen = null;
-        Binominode nykyinen = k.juuri;
-        Binominode seuraava = nykyinen.sisar;
+        BinomiNode edellinen = null;
+        BinomiNode nykyinen = k.juuri;
+        BinomiNode seuraava = nykyinen.sisar;
         //yhdistetään keot tarkistamalla,että keossa ei ole kahta samanasteista puuta.
         while (seuraava != null) {
             if (nykyinen.aste != seuraava.aste || ((seuraava.sisar != null) && (seuraava.sisar.aste == nykyinen.aste))) {
@@ -137,9 +137,9 @@ public class Binomikeko{
         return k;
     }
     //yhdistetään kaksi kekoa
-    Binominode merge(Binomikeko k1, Binomikeko k2) {
-        Binominode solmu1 = null;
-        Binominode solmu2 = null;
+    BinomiNode merge(BinomiKeko k1, BinomiKeko k2) {
+        BinomiNode solmu1 = null;
+        BinomiNode solmu2 = null;
         /*
          * Tarkastetaan, onko 
          * saaduissa keoissa sisältöä.
@@ -158,7 +158,7 @@ public class Binomikeko{
         } else if (solmu2 == null) {
             return solmu1;
         }
-        Binominode h;
+        BinomiNode h;
         if (solmu1.aste < solmu2.aste) {
             h = solmu1;
             solmu1 = solmu1.sisar;
@@ -171,7 +171,7 @@ public class Binomikeko{
          * solmuun. Muutetaan tämä pienin uudeksi nykyiseksi ja jatketaan kunnes
          * toinen alipuu tyhjä.
          */
-        Binominode nykyinen = h;
+        BinomiNode nykyinen = h;
         while (solmu1 != null && solmu2 != null) {
             if (solmu1.aste < solmu2.aste) {
                 nykyinen.sisar = solmu1;
@@ -194,7 +194,7 @@ public class Binomikeko{
     public String toString() {
         String tuloste = "";
 
-        Binominode x = juuri;
+        BinomiNode x = juuri;
         while (x != null) {
             tuloste = tuloste + x.tulostaPuu(0);
             x = x.sisar;
@@ -204,7 +204,7 @@ public class Binomikeko{
     //ohjelman main
     public static void main(String[] args) {
 
-        Binomikeko binomikeko = new Binomikeko();
+        BinomiKeko binomikeko = new BinomiKeko();
         for (int i = 10; i != 0; i--) {
             binomikeko.insert(i);
         }

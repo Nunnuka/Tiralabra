@@ -2,24 +2,24 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package TiraAnnika;
+package binomi;
 
 /**
  *
  * @author Annika
  */
-public class Binominode {
+public class BinomiNode {
 
     int arvo;
     int aste;
-    Binominode sisar;
-    Binominode vanhempi;
-    Binominode lapsi;
+    BinomiNode sisar;
+    BinomiNode vanhempi;
+    BinomiNode lapsi;
 
-    public Binominode() {
+    public BinomiNode() {
     }
 
-    public Binominode(int arvo) {
+    public BinomiNode(int arvo) {
         this.arvo = arvo;
     }
 
@@ -31,7 +31,7 @@ public class Binominode {
         }
         tulostus = tulostus + toString() + "\n";
 
-        Binominode a = lapsi;
+        BinomiNode a = lapsi;
         while (a != null) {
             tulostus = tulostus + a.tulostaPuu(syvyys + 1);
             a = a.sisar;

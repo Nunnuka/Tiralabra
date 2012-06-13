@@ -24,8 +24,13 @@ tehdään uusi keko ja yhdistetään se vanhaan kekoon. Juuri tämä yhdistäminen, eli
 insertin aikavaativuus on O(log n). Pienimmän alkion löytäminen sekä poistaminen saadaan läpi ajassa O(log n).
 Jos pieninpään alkioon on ylläpidetty pointteria, sen löytäminen saadaan läpi ajassa O(1).
 
+Fibonaccikeossa tavoite on saada insert nopeammaksi kuin em. keot, ja delete_min suurinpiirtein samaan, sillä sen 
+aikavaativuus on amortisoitu O(log n).
+
 5. Lähteet
 
 http://www.cs.helsinki.fi/u/tapasane/keot.pdf
 http://www.cs.princeton.edu/~wayne/cs423/demos.html
 http://www.cs.helsinki.fi/u/floreen/tira2012/tira.pdf
+http://en.wikipedia.org/wiki/Fibonacci_heap
+Cormen, Rivest, Leison, Stein: Introduction to Algorithms

@@ -1,11 +1,10 @@
 
 1. Miten koodi k‰‰nnett‰‰n? (jos valmis ajettava ohjelma ei mukana palautuksessa)
 
-Algoritmit voi ajaa komentorivilt‰ k‰skyll‰ javac tiedosto.java
+Algoritmit voi ajaa komentorivilt‰ k‰skyll‰ javac tiedosto.java, tai avata suoraan jollakin IDE:ll‰, esim NetBeans
+tai Eclipse. Jokainen keko on oma projektinsa.
 
 
 2. Miten ohjelma suoritetaan, miten eri toiminnallisuuksia k‰ytet‰‰n?
 
-Jokaisella keolla on p‰‰‰ohjelma main, jossa k‰ytet‰‰n kekojen eri toimintoja, lis‰yksi‰, poistoja, keon tulostus..
-
-3. Mink‰ muotoisia syˆtteit‰ ohjelma hyv‰ksyy?
+Keoilla on eri metodeja, kuten alkioiden poistoa ja lis‰yst‰. Kekoa k‰ytet‰‰n luomalla siit‰ ilmentym‰ ja kutsumalla n‰it‰ metodeita.

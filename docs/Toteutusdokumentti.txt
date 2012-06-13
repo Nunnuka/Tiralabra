@@ -36,6 +36,17 @@ joka käy juurilistan läpi ja etsii niistä pienimmän alkion.
 Binomikeon toteutuksessa löytyy toString-metodi, joka helpottaa keon hahmottamista tulostamalla juurilistan
 ja lapset eri kerroksissa.
 
+Fibonaccikeko:
+
+Fibonaccikeon insert on yksinkertainen: alkiot vain lisäyäänn kahteen suuntaan linkitettyyn listaan oikeaan
+paikkaan, ja tarkastetaan olisiko lisättävä pienempi kuin tämänhetkinen minimi. Pienintä alkiota poistettaessa 
+ensiksi poistetaan pienimmän arvon omaava alkio juurilistasta, ja sen lapsista tulee uusia juuria uusille alipuille. 
+Decrease key vähentää yhden alkion arvoa, mikäli parametrinä on pienempi arvo. Jos kekoehto vioittuu eli alkion
+vanhemmalla on pienempi arvo, leikataan solmu vanhemmasta. Jos vanhempi ei ole juuri, se merkitään. Jos se on jo 
+merkitty, se myös se leikataan ja sen vanhempi merkitään. Tätä jatketaan puussa ylöspäin, kunnes päästääm 
+merkitsemättömään solmuun. Delete vähentää solmun arvon mahdollisimman pieneksi, jolloin siitä tulee koko keon 
+pienin. Sitten kutsutaan pienimmän alkion poistoa.
+
 2. Saavutetut aika- ja tilavaativuudet (m.m. O-analyysi pseudokoodista)
 
 Määrittelydokumentin aikavaativuudet on saavutettu.

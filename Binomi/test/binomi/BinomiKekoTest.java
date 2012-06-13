@@ -23,7 +23,7 @@ public class BinomiKekoTest {
     @Test
     public void lisaysTesti(){
         long alku = System.currentTimeMillis();
-        for (int i = 0; i < 100000; i++){
+        for (int i = 100000; i >= 0; i--){
             keko.insert(i);
         }
         long loppu = System.currentTimeMillis();

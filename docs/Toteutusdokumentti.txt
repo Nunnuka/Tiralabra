@@ -48,20 +48,36 @@ Vertailussa keskeisimm‰t metodit.
 insert		  O(log n)  |  O(log n)  |     O(1)
 deleteMin	  O(log n)  |  O(log n)  |     O(log n) amortisoitu
 decreaseKey	  O(log n)  |  O(log n)  |     O(1)
+	   	            |            |
+100000 lis‰ys       150ms   |     75ms   |      20ms
+100000 poisto       130ms   |     30ms   |     120ms
+			    |            |
+k‰‰nteinen lis‰ys    90ms   |     55ms   |      40ms
+k‰‰nteinen poisto    60ms   |     13ms   |     150ms  
 
 Binaarikeko: 
 Aikaa kului 100000 alkion lis‰ykseen: 150.0ms.
 Aikaa kului 1000000 alkion lis‰ykseen: 1543.0ms.
 Aikaa 100000 alkion poistamiseen kului: 130.0ms.
 
+K‰‰nteinen 100000 alkion (100000, 99999... 1, 0) lis‰ys vei aikaa 90.0ms.
+Nyt 100000 alkion poisto vei aikaa 60.0ms.
+
 Binomikeko: 
 Aikaa kului 100000 alkion lis‰ykseen: 75.0ms.
 Aikaa kului 1000000 alkion lis‰ykseen: 751.0ms
+Aikaa 100000 alkion poistamiseen kului: 30.0ms.
+
+K‰‰nteinen 100000 alkion (100000, 99999... 1, 0) lis‰ys vei aikaa 55.0ms.
+Nyt 100000 alkion poisto vei aikaa 13.0ms.
 
 Fibonaccikeko:
 Aikaa kului 100000 alkion lis‰ykseen: 20.0ms.
 Aikaa kului 1000000 alkion lis‰ykseen: 475.0ms.
 Aikaa 100000 alkion poistamiseen kului: 120.0ms.
+
+K‰‰nteinen 100000 alkion lis‰ys vei aikaa 40.0ms.
+Aikaa 100000 alkion poistamiseen kului 150.0ms.
 
 
 

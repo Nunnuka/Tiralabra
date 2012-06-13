@@ -4,11 +4,11 @@
  */
 package binomi;
 
-    /**
+/**
  *
  * @author Annika
  */
-public class BinomiKeko{
+public class BinomiKeko {
 
     BinomiNode juuri;
     int koko;
@@ -28,7 +28,7 @@ public class BinomiKeko{
         //luodaan uusi keko
         BinomiKeko keko1 = new BinomiKeko();
         BinomiNode solmu = new BinomiNode(arvo);
-        
+
         solmu.vanhempi = null;
         solmu.lapsi = null;
         solmu.sisar = null;
@@ -94,7 +94,6 @@ public class BinomiKeko{
         }
     }
 
-  
     //luodaan kahden annetun binomisolmun välille vanhempi-lapsu yhteys
     public void link(BinomiNode y, BinomiNode z) {
         y.vanhempi = z;
@@ -103,6 +102,7 @@ public class BinomiKeko{
         z.aste++;
     }
     //yhdistetään kaksi kekoa toisiinsa mergeä apuna käyttäen
+
     public BinomiKeko union(BinomiKeko k1, BinomiKeko k2) {
         BinomiKeko k = new BinomiKeko();
         //valitaan juuri mergen avulla
@@ -115,7 +115,7 @@ public class BinomiKeko{
         BinomiNode seuraava = nykyinen.sisar;
         //yhdistetään keot tarkistamalla,että keossa ei ole kahta samanasteista puuta.
         while (seuraava != null) {
-            if (nykyinen.aste != seuraava.aste || ((seuraava.sisar != null) && (seuraava.sisar.aste == nykyinen.aste))) {
+            if (nykyinen.aste != seuraava.aste || (seuraava.sisar != null && seuraava.sisar.aste == nykyinen.aste)) {
                 edellinen = nykyinen;
                 nykyinen = seuraava;
             } else {
@@ -136,60 +136,52 @@ public class BinomiKeko{
         }
         return k;
     }
-    //yhdistetään kaksi kekoa
-    BinomiNode merge(BinomiKeko k1, BinomiKeko k2) {
-        BinomiNode solmu1 = null;
-        BinomiNode solmu2 = null;
-        /*
-         * Tarkastetaan, onko 
-         * saaduissa keoissa sisältöä.
-         */
-        if (k1 != null && k1.juuri != null) {
-            solmu1 = k1.juuri;
+
+    private static BinomiNode merge(BinomiKeko keko1, BinomiKeko keko2) {
+        //Jos toisen juuri on tyhjä, palautetaan suoraan toinen
+        if (keko1.juuri == null) {
+            return keko2.juuri;
+        } else if (keko2.juuri == null) {
+            return keko1.juuri;
         }
-        if (k2 != null && k2.juuri != null) {
-            solmu2 = k2.juuri;
-        }
-        /*
-         * Jos toinen juuri oli null, palautetaan toinen suoraan.
-         */
-        if (solmu1 == null) {
-            return solmu2;
-        } else if (solmu2 == null) {
-            return solmu1;
-        }
-        BinomiNode h;
-        if (solmu1.aste < solmu2.aste) {
-            h = solmu1;
-            solmu1 = solmu1.sisar;
+        //Kumpikaan juurilista ei siis ole tyhjä. Käydään molemmat läpi käyttäen aina 
+        //pienimmän arvon omaavaa solmua.
+        BinomiNode juuri;		  
+        BinomiNode viimeinen;		  
+        BinomiNode seuraava1 = keko1.juuri,
+                seuraava2 = keko2.juuri; 
+        if (keko1.juuri.arvo <= keko2.juuri.arvo) {
+            juuri = keko1.juuri;
+            seuraava1 = seuraava1.sisar;
         } else {
-            h = solmu2;
-            solmu2 = solmu2.sisar;
+            juuri = keko2.juuri;
+            seuraava2 = seuraava2.sisar;
         }
-        /*
-         * Kuljetaan kahden listan läpi linkaten nykyinen seuraavaan pienempään
-         * solmuun. Muutetaan tämä pienin uudeksi nykyiseksi ja jatketaan kunnes
-         * toinen alipuu tyhjä.
-         */
-        BinomiNode nykyinen = h;
-        while (solmu1 != null && solmu2 != null) {
-            if (solmu1.aste < solmu2.aste) {
-                nykyinen.sisar = solmu1;
-                nykyinen = solmu1;
-                solmu1 = solmu1.sisar;
+        viimeinen = juuri;
+        //Käy molemmat juurilistat läpi kunnes toinen loppuu.
+        while (seuraava1 != null && seuraava2 != null) {
+            if (seuraava1.arvo <= seuraava2.arvo) {
+                viimeinen.sisar = seuraava1;
+                seuraava1 = seuraava1.sisar;
             } else {
-                nykyinen.sisar = solmu2;
-                nykyinen = solmu2;
-                solmu2 = solmu2.sisar;
+                viimeinen.sisar = seuraava2;
+                seuraava2 = seuraava2.sisar;
             }
+
+            viimeinen = viimeinen.sisar;
         }
-        if (solmu1 == null) {
-            nykyinen.sisar = solmu2;
+
+        //Nyt toinen juurilista on loppunut. Jatketaan jäljellä olevasta juurilistasta loput 
+        //listaan.
+        if (seuraava1 != null) {
+            viimeinen.sisar = seuraava1;
         } else {
-            nykyinen.sisar = solmu1;
+            viimeinen.sisar = seuraava2;
         }
-        return h;
+        return juuri;
+
     }
+
     //tulostetaan puu
     public String toString() {
         String tuloste = "";
@@ -202,6 +194,7 @@ public class BinomiKeko{
         return tuloste;
     }
     //ohjelman main
+
     public static void main(String[] args) {
 
         BinomiKeko binomikeko = new BinomiKeko();
@@ -214,6 +207,3 @@ public class BinomiKeko{
         System.out.println(binomikeko.toString());
     }
 }
-
-    
-

@@ -1,0 +1,17 @@
+
+
+1. Mitä on testattu, miten tämä tehtiin?
+
+Testasin vertailupohjalta kolmen eri keon keskeisimpiä metodeita (insert ja delete) erikokoisilla syötteillä.
+Mittasin samalla kuluneen ajan.
+
+2. Minkälaisilla syötteillä testaus tehtiin? (vertailupainotteisissa töissä tärkeätä)
+
+Syötteenä käytin normaaleja integer-lukuja, ainoastaan syötteen koko vaihteli ja sen pohjalta sain selville kekojen
+eroavaisuudet. Kun yritin laittaa syötteen kooksi 10 miljoonaa, huomasin, että NetBeans ei voi enää ajaa testiä läpi,
+menee liian kauan. Miljoonan syötteen testi on siis suurin millä testattu. Mielenkiintoista olisi, jos voisi testata 
+vielä paljon suuremmilla syötteillä ja selvittää niihin kuluvat ajat.
+
+3. Miten testit voidaan toistaa?
+
+
